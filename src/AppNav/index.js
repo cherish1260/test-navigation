@@ -1,9 +1,9 @@
-import { NavigationActions, StateUtils } from 'react-navigation';
+import { NavigationActions, StateUtils, StackActions } from 'react-navigation';
 
 const defaultConfig = {
   rootName: 'root',
-  loginName: 'start',
-  topRoutes: ['start', 'root', 'home', 'shop', 'my'],
+  loginName: 'login',
+  topRoutes: ['login', 'root', 'home', 'shop', 'my'],
 };
 const AppNav = {
   navigatorInstance: null,
@@ -78,7 +78,7 @@ const AppNav = {
   },
 
   root(routeName, params) {
-    const resetAction = NavigationActions.reset({
+    const resetAction = StackActions.reset({
       index: 0,
       actions: [
         NavigationActions.navigate({ routeName: 'root', action: NavigationActions.navigate({ routeName, params }) }),
@@ -88,7 +88,7 @@ const AppNav = {
   },
 
   root2(rootName, routeName, params) {
-    const resetAction = NavigationActions.reset({
+    const resetAction = StackActions.reset({
       index: 1,
       actions: [
         NavigationActions.navigate({

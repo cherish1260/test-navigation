@@ -1,4 +1,5 @@
 import About from '../business/About';
+import Login from '../business/Login';
 
 export default {
   about: {
@@ -6,6 +7,13 @@ export default {
     path: 'about',
     navigationOptions: {
       title: '关于',
+    },
+  },
+  login: {
+    screen: Login,
+    path: 'login',
+    navigationOptions: {
+      header: null,
     },
   },
 };

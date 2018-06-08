@@ -20,7 +20,7 @@ const CustomStackNav = createStackNavigator(
     ...Route,
   },
   {
-    initialRouteName: 'root',
+    initialRouteName: 'login',
     onTransitionStart: () => {
       isTransitioning = true;
     },
