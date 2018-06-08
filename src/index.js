@@ -6,55 +6,47 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
   View,
+  ActivityIndicator,
+  YellowBox,
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
+// 根目录缓存，防止重新创建
+let AppRootCache;
+YellowBox.ignoreWarnings([
+  'Warning: isMounted(...) is deprecated in plain JavaScript React classes.',
+  'Remote debugger is in a background tab which may cause apps to perform slowly. Fix this by foregrounding the tab (or opening it in a separate window).',
+]);
 export default class App extends Component {
-  test() {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      showTab: false,
+    };
+  }
+  componentDidMount() {
+    this.initRoot();
+  }
+  initRoot = () => {
+    if (!AppRootCache) {
+      AppRootCache = require('./AppNav/StackNav').default;
+    }
+    if (!this.state.showTab) {
+      this.setState({
+        showTab: true,
+      });
+    }
+    // });
   }
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
+    if (this.state.showTab) {
+      return (<AppRootCache uriPrefix="nsip://" screenProps={this.props} />);
+    } else {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
