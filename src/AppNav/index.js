@@ -86,24 +86,6 @@ const AppNav = {
     });
     this.dispatch(resetAction);
   },
-
-  root2(rootName, routeName, params) {
-    const resetAction = StackActions.reset({
-      index: 1,
-      actions: [
-        NavigationActions.navigate({
-          routeName: 'root',
-          action: NavigationActions.navigate({
-            rootName,
-          }),
-        }),
-        NavigationActions.navigate({
-          routeName, params,
-        }),
-      ],
-    });
-    this.dispatch(resetAction);
-  },
   /**
    * 依据action新建路由，返回新的state
    * 此时新路由处于栈顶
